@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HotWheels Garage | Driven by Passion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: #ff5b00;
+            transform: translateY(-4px);
+        }
+        .inner-glow {
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.1);
+        }
+        .spotlight-orange {
+            background: radial-gradient(circle at center, rgba(255, 91, 0, 0.15) 0%, transparent 70%);
+        }
+        .spotlight-blue {
+            background: radial-gradient(circle at center, rgba(0, 112, 255, 0.15) 0%, transparent 70%);
+        }
+        .chrome-text {
+            background: linear-gradient(to bottom, #ffffff 0%, #a1a1a1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes subtle-zoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        .animate-zoom {
+            animation: subtle-zoom 20s infinite alternate linear;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #ff5b00; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353534",
+                        "on-secondary-container": "#002661",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#001945",
+                        "on-tertiary-container": "#5f0000",
+                        "on-surface-variant": "#e4beb1",
+                        "primary": "#ffb59a",
+                        "primary-container": "#ff5b00",
+                        "on-primary-fixed-variant": "#802a00",
+                        "outline": "#ab897d",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed-variant": "#930100",
+                        "on-tertiary-fixed": "#410000",
+                        "primary-fixed": "#ffdbce",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b0c6ff",
+                        "on-surface": "#e5e2e1",
+                        "surface-tint": "#ffb59a",
+                        "surface-variant": "#353534",
+                        "on-primary": "#5b1b00",
+                        "secondary-container": "#568dff",
+                        "tertiary": "#ffb4a8",
+                        "tertiary-fixed": "#ffdad4",
+                        "primary-fixed-dim": "#ffb59a",
+                        "tertiary-container": "#ff5944",
+                        "outline-variant": "#5b4137",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary": "#002d6f",
+                        "on-secondary-fixed-variant": "#00429c",
+                        "background": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary": "#690000",
+                        "on-background": "#e5e2e1",
+                        "secondary-fixed": "#d9e2ff",
+                        "surface-bright": "#393939",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#b0c6ff",
+                        "surface-container": "#201f1f",
+                        "surface-dim": "#131313",
+                        "on-primary-container": "#521800",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "inverse-primary": "#a83900",
+                        "on-primary-fixed": "#380d00",
+                        "surface": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "section-gap": "128px",
+                        "gutter": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Sora"],
+                        "label-caps": ["JetBrains Mono"],
+                        "stat-value": ["Sora"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "display-lg-mobile": ["Sora"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                        "stat-value": ["48px", {"lineHeight": "1.0", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TOP NAVIGATION -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/80 backdrop-blur-3xl border-b border-white/10">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-extrabold text-primary-container tracking-tighter">HotWheels Garage</span>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1" href="#">Collection</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Categories</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Featured</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-caps text-label-caps hover:scale-95 transition-all duration-200">
+            Sign In
+        </button>
+</nav>
+<!-- HERO SECTION -->
+<header class="relative w-full h-[921px] flex items-center justify-center overflow-hidden pt-16">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 animate-zoom" data-alt="A cinematic close-up shot of a rare orange die-cast muscle car positioned on a dark reflective surface. The background is a moody, dark automotive workshop with soft orange and blue rim lighting highlighting the car's aerodynamic curves. The atmosphere is luxurious and exclusive, emphasizing engineering precision and automotive art. High-contrast blacks and vibrant orange accents dominate the frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUJ2cefuBjQLim7ellOnHWtX_fOUM78X4i62VvhtWEaKYg9sk3a3Okof6DjJRly3eV2hNbfq4sbJRjnICA0vzzvTXOzGma9ZtWV5rUt6-8ppUxU3D-p6RNVmxCwhhzrs7iR3iymN_s4HLIx30UhNkGQl4JRiU6HaH6x36qQ4f_QTAXDoaEZP23i1ueyQHKg7KVW9iC2IzxhW9T1g4lvESSXbdUKOCo5DWTem6SGFvuLb0FPgiyZ2fY4tI6I4S6R8qO789tKlfGbk8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/80"></div>
+</div>
+<div class="relative z-10 text-center px-margin-mobile max-w-4xl">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-6 tracking-tighter">
+                Driven by Passion.<br/><span class="text-primary-container">Built for Collectors.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                Explore my curated Hot Wheels collection featuring rare editions, classics, modern releases, and exclusive finds.
+            </p>
+<div class="flex flex-col md:flex-row justify-center gap-4">
+<button class="px-10 py-4 bg-primary-container text-on-primary-container font-label-caps text-label-caps hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                    View Collection
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-10 py-4 border-2 border-secondary text-secondary font-label-caps text-label-caps hover:bg-secondary/10 transition-all">
+                    Explore Rare Finds
+                </button>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+<span class="material-symbols-outlined text-4xl">expand_more</span>
+</div>
+</header>
+<!-- COLLECTION SHOWCASE -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="flex justify-between items-end mb-16">
+<div class="max-w-xl">
+<p class="font-label-caps text-label-caps text-primary-container mb-2">ELITE SERIES</p>
+<h2 class="font-headline-lg text-headline-lg">Collection Showcase</h2>
+</div>
+<div class="hidden md:block">
+<button class="font-label-caps text-label-caps text-on-surface-variant border-b border-on-surface-variant/30 pb-1 hover:text-primary-container hover:border-primary-container transition-all">View All 1,250 Cars</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="glass-card inner-glow group overflow-hidden">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A detailed macro photography shot of a '67 Camaro Super Treasure Hunt model in vibrant Spectraflame paint. The car is showcased on a polished black glass surface with dramatic spotlighting from above. Deep shadows and bright chrome reflections emphasize its classic muscle car silhouette. The color palette is dominated by intense orange and deep charcoal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXewaESbQvAVE2iDvxsDeB6R-9nN8pDwaIMc7LF6pzsRwRksuPSzk8sq6STWBXFW3zpeb_Iiy26VOC84De8B_jyMedHx399gH3puu5_ertMMWKbUSmh5NzT5s4AHLuSVcAOUUNYOBqqwMsG8tE_j09qZsfUOqwUroNHw0rneibim2dRQnIGW0uEl-5QcjTEB9JMuSXm0l86hRBmU5ntCdd5qmHh7iR1XI0A4FUpwHU3GI5SiRyRDEkSF7RWThTXljMN64Sh7NVoO0"/>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 font-label-caps text-[10px]">STH BADGE</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">'67 Camaro</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2023</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-6 italic">Super Treasure Hunt 2023 Edition</p>
+<button class="w-full py-3 border border-white/10 font-label-caps text-label-caps group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">Explore Specs</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card inner-glow group overflow-hidden">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-performance Nissan Skyline GT-R R34 scale model in a deep midnight blue, presented in a futuristic neon-lit garage setting. Blue and red neon streaks reflect off its aerodynamic body. The image is captured with a low angle to give the small car a monumental, powerful appearance. Cinematic lighting and sharp edges define the premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSeR-4jsVkUwQ7EWK9-ys4_MBEnGwUx0q6By721qnLEJX3Peoz79THnqTulAiN5rNB1brUxE3pykXn9QkQapABRkmmlr6W1djS6sk-WBZQOnmYLlDf6jKu3GoJytynJPPagmnDcm1Kry_rvGoHfrCqwGECzos9iQUnLtgIWF7AOYZ7K_jfZopJaV9SI6ctK-EVHuY2N5OmxBcH8z_sP9zgp58lZ76xp8ywwL-v_osfXh87jzcN5o4qiAWUiDi-YDetQlXOmr5HjwM"/>
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 font-label-caps text-[10px]">RARE BADGE</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Nissan Skyline GT-R R34</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2022</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-6 italic">Premium Series - Midnight Edition</p>
+<button class="w-full py-3 border border-white/10 font-label-caps text-label-caps group-hover:bg-secondary group-hover:text-on-secondary transition-all">Explore Specs</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card inner-glow group overflow-hidden">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A striking white and black Porsche 911 GT3 RS Hot Wheels model featured in a minimalist, bright architectural space. Soft, high-key lighting illuminates every curve and the aggressive rear wing. The design aesthetic is clean, modern, and high-prestige, reflecting the car's racing heritage. Subtle grey gradients and sharp focus create a sense of extreme speed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAar_jKgLdUIUg7JjmGblj8siuO2R8IqsyOGZ5V9n8-_sGO2-sUEUFl2NYeU-ZS6Rd5Qep19fRPJSZLEFDJ9aDOlkbNKm6BkJVx5of3Xzapvy_v7HdfBkE9oEwA6YWb8GhkgSVOsmLVOFPA9FujGhJHIF0jVkwj3r46TpnhG0-IOjmmYpE-H2pLUFKdcKnU_9uNtbYSV4cpjbEnq8n5UYQK7T7rEyhO6T6v7XPWvJWT_f1__mdbCnB9CsiiDOG2E-xypzLT-NRxL6I"/>
+<div class="absolute top-4 right-4 bg-tertiary text-on-tertiary px-3 py-1 font-label-caps text-[10px]">LIMITED EDITION</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Porsche 911 GT3 RS</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">2024</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-6 italic">Exotic Envy Series</p>
+<button class="w-full py-3 border border-white/10 font-label-caps text-label-caps group-hover:bg-tertiary group-hover:text-on-tertiary transition-all">Explore Specs</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CATEGORIES BENTO -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-background">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4">Curated Categories</h2>
+<p class="font-body-md text-on-surface-variant max-w-xl mx-auto">From the rarest factory finds to timeless silver screen icons.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[600px]">
+<div class="md:col-span-2 md:row-span-2 glass-card inner-glow relative overflow-hidden group cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" data-alt="A top-down view of several Super Treasure Hunt cars arranged in a geometric pattern. The vibrant paints and chrome wheels are accented by sharp overhead lighting. The composition is artistic and structured, symbolizing the ultimate collector's goal. Deep blacks and high-contrast highlights create a dramatic effect." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4RF_rWebtbeYv-1HRcSWCZ_9a7Ouoj1BQlfQBupUuKMKtPgs7kRsdBjgejaSCS3MYf-HtePlFhmXfWiWHDPEckvnwKTNw2bdRlGhYmBC9SfJKwpjCLKPHJdxwK5pQmWdebXI0jizhMVBe6-ktra3miorkVdi5Xr7ePNEj5LxyKqpwYKJufbinhmnurTB5rjhuajZFP08nJn9oVnNstnvviIlJvAGRkTll53dqAZ6vqyTXVDrpqOhv-MGRyhM39sL8tCfx3bfaBHg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<h3 class="font-headline-lg text-headline-lg">Super Treasure Hunts</h3>
+<p class="font-label-caps text-label-caps text-primary-container">The Holy Grail</p>
+</div>
+</div>
+<div class="glass-card inner-glow relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 spotlight-blue opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute bottom-6 left-6">
+<h3 class="font-headline-md text-headline-md">Mainline</h3>
+<p class="font-label-caps text-label-caps text-secondary">Essential Picks</p>
+</div>
+</div>
+<div class="glass-card inner-glow relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 spotlight-orange opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute bottom-6 left-6">
+<h3 class="font-headline-md text-headline-md">Premium</h3>
+<p class="font-label-caps text-label-caps text-primary-container">Real Riders</p>
+</div>
+</div>
+<div class="md:col-span-2 glass-card inner-glow relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-r from-tertiary/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h3 class="font-headline-md text-headline-md">Vintage Classics</h3>
+<p class="font-label-caps text-label-caps text-tertiary">1968 - 1990</p>
+</div>
+</div>
+<div class="glass-card inner-glow relative overflow-hidden group cursor-pointer">
+<div class="absolute bottom-6 left-6">
+<h3 class="font-headline-md text-headline-md">Movie/Pop</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Silver Screen</p>
+</div>
+</div>
+<div class="glass-card inner-glow relative overflow-hidden group cursor-pointer border-primary-container/30">
+<div class="absolute bottom-6 left-6">
+<h3 class="font-headline-md text-headline-md">Limited</h3>
+<p class="font-label-caps text-label-caps text-primary">Convention Exclusives</p>
+</div>
+</div>
+</div>
+</section>
+<!-- STATISTICS -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low border-y border-white/5">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter text-center">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-4">TOTAL COLLECTION</p>
+<div class="font-stat-value text-stat-value chrome-text mb-2">1,250+</div>
+<p class="font-body-md text-on-surface-variant">Cars Collected</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-4">RARE MODELS</p>
+<div class="font-stat-value text-stat-value chrome-text mb-2">45</div>
+<p class="font-body-md text-on-surface-variant">Hunt Variants</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-4">EXCLUSIVES</p>
+<div class="font-stat-value text-stat-value chrome-text mb-2">12</div>
+<p class="font-body-md text-on-surface-variant">Limited Editions</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-4">EXPERIENCE</p>
+<div class="font-stat-value text-stat-value chrome-text mb-2">15</div>
+<p class="font-body-md text-on-surface-variant">Years of Collecting</p>
+</div>
+</div>
+</section>
+<!-- ABOUT THE COLLECTOR -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5">
+<p class="font-label-caps text-label-caps text-primary-container mb-4">THE MISSION</p>
+<h2 class="font-headline-lg text-headline-lg mb-8">Preserving Automotive Art in 1:64 Scale</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">
+                    What started with a single '69 Dodge Charger has evolved into a lifelong pursuit of automotive history. My mission is to document and preserve the intricate craftsmanship of die-cast engineering through this digital museum.
+                </p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    From hunting in brick-and-mortar stores to trading with global collectors, every car in this garage tells a story of speed, design, and the thrill of the chase.
+                </p>
+<div class="mt-10 flex gap-4">
+<div class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:text-primary-container cursor-pointer transition-colors">
+<span class="material-symbols-outlined">photo_camera</span>
+</div>
+<div class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:text-primary-container cursor-pointer transition-colors">
+<span class="material-symbols-outlined">videocam</span>
+</div>
+<div class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:text-primary-container cursor-pointer transition-colors">
+<span class="material-symbols-outlined">share</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 relative">
+<div class="relative z-10 p-4 bg-gradient-to-br from-white/10 to-transparent rounded-lg">
+<img class="w-full h-full object-cover rounded shadow-2xl" data-alt="A portrait of a collector's hand carefully placing a rare car onto a detailed multi-level display shelf. The background shows hundreds of organized blister packs and loose cars, all illuminated by soft LED strip lighting that creates a professional gallery feel. The scene is shot with a shallow depth of field, emphasizing the tactile nature of the hobby and the vastness of the collection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARvNUGW0tMChTTpzltx_w9ooV_8plo-7_YDcLdMec4nJsm5nixN5NKqV28S1CAPXHQ7I88gVniXQFY_g_irDzlL-NrYjCRIcLAgYS9n-Ws_WDHO6pBCiiraHlVoWKBYye3B9jjKIpH4ZdCns470qjpxlDV__P_QVUUnDQn1ZKt7EbazbKprpoI16CaOZMvGhs4S_NlhHgzOPBlVzr5QSp1S1Dkq4Go743-gNLvhEALN8mX09ZfM-IqS9dCNwuEs3kTeMgsqT2Valw"/>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary-container/20 blur-[100px]"></div>
+<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/20 blur-[100px]"></div>
+</div>
+</div>
+</section>
+<!-- PINTEREST GALLERY -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg">Gallery &amp; Scenes</h2>
+</div>
+<div class="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4">
+<div class="relative group overflow-hidden glass-card">
+<img class="w-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A professional close-up of a customized Hot Wheels car on a miniature city street diorama at night. Neon signs reflect off the car's metallic paint. The level of detail is extraordinary, blending toys with cinematic realism. Dark moody atmosphere with pops of neon purple and pink." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyCbdd8Y1aAeQ5oKH46xRBfIKcjVWvPyndfYHjkxYpzyO9PO8qyGqVx6DQutXy8xBHSX-M-JYvOhTWIfurEX3bD24W9S1h0Wh4C33BMxX0rZFYtuUnZyJi_OSgh8y3dfq8ivsDka4gPvCKrvaq9zWjJjM7siTGG10CSKGA_F0YalsrC9tGnXSQgO-2i7s4s_vA-q3anQnH4U_2i5us6YQ5OP3iG2Fc5m4A23_tQ4z_ScHkFc3qdMaXi8Sas-OPyGSdF-vYtz2dvHQ"/>
+</div>
+<div class="relative group overflow-hidden glass-card">
+<img class="w-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A high-speed action shot of a Hot Wheels car mid-air, caught jumping over a dramatic loop-the-loop track. Motion blur in the background conveys a sense of intense speed. The car's bright red color pops against the dark, high-tech track environment. Dramatic, high-contrast lighting captures the essence of the thrill of play." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiaP8fyyypmqGpGCtt7jHzkDOew_SmlY2XSoWgg_6LJLyxQIt7GNelTd0b9hW2lWw4xr3Lf5533ASc8CJEdR-_pK5DeoA7IHdNPsOP0zDUeJHTCK3XMXhCB-x9rY9h7AkfwOr_6uUkKkAc2sWS7a9FQNv2-unElnRrrPUmp88uoPG6cZa3k55Rx-ZCGISYnzzqqp5LBXUfwOtMUZsGIULXPZ8IY8t92qzWTDbGn5Dn4DL2DzrH1LXrV43RQUwMfE5tsbFL1l1rNmY"/>
+</div>
+<div class="relative group overflow-hidden glass-card">
+<img class="w-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="An artistic flat-lay of several rare Hot Wheels in their original packaging, arranged on a dark carbon fiber surface. The lighting is soft and even, highlighting the mint condition of the cards and the glossy finish of the cars. The composition is clean and professional, appealing to serious 'mint-on-card' collectors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6jfaul53iC3pn49qHZ-UckM7l2opX-YaAfoKbbftW7tp2PNxC97GtnjqHh5fgalhmmKnGTYGFTv5kMzro11eh6HmfG6pb5HZgnnnlf2v2tHn2NjXybAyZeVZ6nGL-gHdn9qvC8BNS9nZY9EbmyrIWILAmM7kzCi-zxUfbE0scudZH3mUB9FdXAQ2M937Eo33keDEZpXPGxIyIpXusGOnIh7ccSSpPfK64BfxSfmykN_X8AxV9YsUr4t-kUoNf9ZZYR97L5zh2JjI"/>
+</div>
+<div class="relative group overflow-hidden glass-card">
+<img class="w-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A macro shot focused on the tiny, intricate wheel detail of a premium die-cast car. The Real Riders rubber tires and detailed alloy rims are visible. The lighting mimics a professional car photoshoot, with soft box reflections and sharp focus. The color palette is dark, emphasizing the metallic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyAvOd8d8o1G-ZQccnKiU0alrA9ODb5h3nWsjVbE3tqWaun9oxt-CmfPyWdMNnokjlaUlzqquNlMyixF9pEog_Jkc3fI2NaBUeRJZVfTQZgr0Ss_Kw94ldBRNHB3pD-i9adYgFvFkQOkgnr1E0ohSvk19kDWVTYhgTt0iYhIJzrBXVDwC5SokYwuOnDrgYDnvw0Ujf2ckn_2zlvSoSzDiA_aL7NJnJjiKSyrs23br4jRYuFiXsMsqBCoo7IVr5fdGwT3JRoHOL_bA"/>
+</div>
+<div class="relative group overflow-hidden glass-card">
+<img class="w-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A row of classic Hot Wheels muscle cars lined up like a real car show on a dark, reflective granite surface. The varying colors create a rainbow-like spectrum, while the uniform angle provides a sense of organized precision. The mood is one of nostalgic prestige and admiration for automotive design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJmxaSHSNvuPMwpfgXpY0WBhsV0zZdBf_NiwoubXwsme-fuWpIFF5Fn4uWpYZlGJnS4U7euXpAP53JwZuHkhn8j6aHn5R4EpH1VsRsgGeDa6KCA3m87M7skoYvkHHPLfLdckv8aaaFJQXZUu-_c4h4XEVuqhiTo6jTRtA4p_odEu4iKSTh_ilnqJM60FFkcxJ-eRMqaSi6o5M6mFpdvh4dxDRfJmwGlP4Pgkp8rSMS0KGid8NcAO06KaIOeRzChdvXAMwGfWtQeAY"/>
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-8 glass-card inner-glow flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary-container text-4xl mb-6">format_quote</span>
+<p class="font-body-lg text-body-lg text-on-surface mb-8 italic">"The most comprehensive digital garage I've seen. The attention to detail in documenting the history of each piece is incredible."</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-2 border-primary-container p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Profile photo of a professional-looking man in his late 30s with a kind expression. High-key lighting, soft professional studio background. He represents a serious adult collector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrAa8yi-aLmQ9L8rLSOL4imPSQN2aeRE02p8Q_lu2aLzqGf8YoKX6JL5dBH7TzEkG6bEoc9UwFyiLt6t5tMw_iNjaxSzV32tuQFcaGHPbUsMwh0WZKELdeY97o9Tg1F3RTwkzI5uMbk6O5BHuUJScHE2SqZgncyQaXjTSk71rBxiDIrvWeF4YRrU1JUFARYI_4ChCQb2kQB8mgIs_xZDtU9-5i5TCVejG_c81PpSSePxgEOVocAk6XuTGr9RnZ2VAa6D_rC6600OA"/>
+</div>
+<div>
+<p class="font-headline-md text-sm font-bold">Marcus Chen</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">ELITE COLLECTOR TIER</p>
+</div>
+</div>
+</div>
+<div class="p-8 glass-card inner-glow flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">format_quote</span>
+<p class="font-body-lg text-body-lg text-on-surface mb-8 italic">"Incredible photography. It's rare to see these models captured with such cinematic flair. A true inspiration for my own collection."</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-2 border-secondary p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Profile photo of a stylish woman in her late 20s with a creative aesthetic. Bright, natural lighting with a slightly blurred artistic background. She represents the new generation of automotive lifestyle enthusiasts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGWK3NZnJgZDCsPZlE1mSiFhMVH1w6_bGm0hD8-mnUPxNR1MC5TKvfdIXBAhqDaAe2epT7WfXZqTjHnBz9sX6RFm4zK1MMyTs_GWj-nYgcNltRGUpnMGJeCI32MOTlJkFqNpdySI9UbXzdaYayrsYlHq4CGay1EBPxZt_XkyA3xu9-jJHrcrT-T44ls3yUArsLs0mNMznmL7qh2uc5-pQGXY4o1CZI8Khsk6WZtuJIKO2kt_gF3Qf4WvfUVH2gFGSLnYr-20M2824"/>
+</div>
+<div>
+<p class="font-headline-md text-sm font-bold">Sarah Jenkins</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">DIE-CAST PHOTOGRAPHER</p>
+</div>
+</div>
+</div>
+<div class="p-8 glass-card inner-glow flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-tertiary text-4xl mb-6">format_quote</span>
+<p class="font-body-lg text-body-lg text-on-surface mb-8 italic">"The rarity data and variant cataloging is top-notch. This garage is an essential resource for the local trade community."</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-2 border-tertiary p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Profile photo of a middle-aged man with glasses, looking professional and scholarly. Neutral studio lighting, clean background. He represents a seasoned veteran in the hobby." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTt7HJtFJGH2MGOfmp_lvrBOaAinclPLPvf6RyL46FpwQkH3VGHnKn2dcshQnJkhueAFFwFWIefT2ZEHenFohcIZJBCrvltPGZ80LFVOkyFep14QXV_6SPGWzfprLhteR7IPapuQbyxq-moTbFc9WzPk1jEyFGds0ldDLeKgBIASs5S7FQ7sZYrGXm5xJ8OYdR0Ygb-Xe9WKg2APb3MXIr-UmGIuwuNzwK-j984M1ji9b9t_DTpup0eu_XYGmJnbfhPVP2WgvDeFg"/>
+</div>
+<div>
+<p class="font-headline-md text-sm font-bold">David Miller</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">VINTAGE ADVISOR</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL CTA -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-low relative overflow-hidden">
+<div class="absolute inset-0 spotlight-orange opacity-20"></div>
+<div class="relative z-10 text-center max-w-2xl mx-auto">
+<h2 class="font-display-lg-mobile md:font-headline-lg text-display-lg-mobile md:text-headline-lg mb-6">Ready to Explore the Garage?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10">Join our community of collectors and stay updated on the latest finds and rare hunt releases.</p>
+<div class="flex flex-col md:flex-row justify-center gap-4">
+<button class="px-10 py-4 bg-primary-container text-on-primary-container font-label-caps text-label-caps hover:brightness-110 transition-all">
+                    Browse Full Collection
+                </button>
+<button class="px-10 py-4 border border-white/20 hover:bg-white/5 font-label-caps text-label-caps transition-all">
+                    Get in Touch
+                </button>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="w-full py-section-gap px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between gap-gutter bg-surface-container-low border-t border-outline-variant">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-on-surface block mb-4">HotWheels Garage</span>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-8">
+                Engineered for Collectors. Dedicated to the preservation and appreciation of die-cast automotive art.
+            </p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">© 2024 HotWheels Garage. Engineered for Collectors.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="flex flex-col gap-4">
+<p class="font-label-caps text-label-caps text-primary mb-2">QUICK LINKS</p>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Shipping</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Returns</a>
+</div>
+<!-- More footer columns could go here -->
+</div>
+</footer>
+<script>
+        // Smooth entrance animations for sections
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+
+        // Simple counter animation
+        const stats = document.querySelectorAll('.font-stat-value');
+        stats.forEach(stat => {
+            const target = parseInt(stat.innerText.replace(/[^0-9]/g, ''));
+            let current = 0;
+            const increment = target / 100;
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    stat.innerText = Math.ceil(current) + (stat.innerText.includes('+') ? '+' : '');
+                    setTimeout(updateCounter, 10);
+                } else {
+                    stat.innerText = target + (stat.innerText.includes('+') ? '+' : '');
+                }
+            };
+            
+            const statsObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    updateCounter();
+                    statsObserver.unobserve(stat);
+                }
+            });
+            statsObserver.observe(stat);
+        });
+    </script>
+</body></html>
