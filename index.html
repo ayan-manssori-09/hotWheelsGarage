@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
@@ -17,6 +17,24 @@
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: conic-gradient(transparent, rgba(255, 91, 0, 0.3), transparent, transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: inherit;
+            z-index: -1;
+        }
+        .glass-card:hover::before {
+            opacity: 1;
         }
         .glass-card:hover {
             border-color: #ff5b00;
@@ -46,6 +64,155 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #080808; }
         ::-webkit-scrollbar-thumb { background: #ff5b00; border-radius: 10px; }
+
+        /* ===== ENHANCED ANIMATIONS ===== */
+        
+        /* Pulse glow on car cards */
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 91, 0, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(255, 91, 0, 0.5), inset 0 0 15px rgba(255, 91, 0, 0.1); }
+        }
+        .animate-card-glow {
+            animation: cardGlow 3s ease-in-out infinite;
+        }
+        .glass-card:hover {
+            animation: cardGlow 2s ease-in-out infinite;
+        }
+
+        /* Shine sweep effect on buttons */
+        @keyframes shineSweep {
+            0% { transform: translateX(-100%) rotate(20deg); }
+            100% { transform: translateX(200%) rotate(20deg); }
+        }
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%) rotate(20deg);
+            transition: transform 0.6s ease;
+        }
+        .btn-shine:hover::after {
+            transform: translateX(200%) rotate(20deg);
+        }
+
+        /* 3D Tilt effect on collection cards */
+        @keyframes tiltGlow {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+            100% { filter: brightness(1); }
+        }
+        .tilt-card {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .tilt-card:hover .card-image-wrapper {
+            transform: scale(1.08);
+        }
+        .tilt-card .card-image-wrapper {
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Scale + rotate on category bento items */
+        @keyframes bentoHover {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.05) rotate(1deg); }
+        }
+        .bento-item:hover {
+            animation: bentoHover 0.4s ease-out forwards;
+        }
+        .bento-item:hover .spotlight-orange,
+        .bento-item:hover .spotlight-blue {
+            opacity: 1 !important;
+            transform: scale(1.1);
+        }
+
+        /* Floating animation for decorative elements */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-8px) rotate(1deg); }
+            66% { transform: translateY(4px) rotate(-1deg); }
+        }
+        .animate-floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+        .animate-floating-delayed {
+            animation: floating 5s ease-in-out infinite 1s;
+        }
+
+        /* Gallery image particle reveal on hover */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 91, 0, 0.15), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Entrance scroll animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+        }
+        .reveal-fade-up.active { animation: fadeInUp 0.8s ease-out forwards; }
+        .reveal-fade-left.active { animation: fadeInLeft 0.8s ease-out forwards; }
+        .reveal-fade-right.active { animation: fadeInRight 0.8s ease-out forwards; }
+        .reveal-scale.active { animation: scaleIn 0.8s ease-out forwards; }
+
+        /* Staggered children animation */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .stagger-children.active > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(7) { transition-delay: 0.7s; opacity: 1; transform: translateY(0); }
+        .stagger-children.active > *:nth-child(8) { transition-delay: 0.8s; opacity: 1; transform: translateY(0); }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -153,9 +320,9 @@
 <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
 <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
 </div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-caps text-label-caps hover:scale-95 transition-all duration-200">
+<a href="signin.html" class="bg-primary-container text-on-primary-container px-6 py-2 font-label-caps text-label-caps hover:scale-95 transition-all duration-200 btn-shine">
             Sign In
-        </button>
+        </a>
 </nav>
 <!-- HERO SECTION -->
 <header class="relative w-full h-[921px] flex items-center justify-center overflow-hidden pt-16">
@@ -196,10 +363,10 @@
 <button class="font-label-caps text-label-caps text-on-surface-variant border-b border-on-surface-variant/30 pb-1 hover:text-primary-container hover:border-primary-container transition-all">View All 1,250 Cars</button>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter stagger-children">
 <!-- Card 1 -->
-<div class="glass-card inner-glow group overflow-hidden">
-<div class="relative h-64 overflow-hidden">
+<div class="glass-card inner-glow group overflow-hidden tilt-card">
+<div class="relative h-64 overflow-hidden card-image-wrapper">
 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A detailed macro photography shot of a '67 Camaro Super Treasure Hunt model in vibrant Spectraflame paint. The car is showcased on a polished black glass surface with dramatic spotlighting from above. Deep shadows and bright chrome reflections emphasize its classic muscle car silhouette. The color palette is dominated by intense orange and deep charcoal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXewaESbQvAVE2iDvxsDeB6R-9nN8pDwaIMc7LF6pzsRwRksuPSzk8sq6STWBXFW3zpeb_Iiy26VOC84De8B_jyMedHx399gH3puu5_ertMMWKbUSmh5NzT5s4AHLuSVcAOUUNYOBqqwMsG8tE_j09qZsfUOqwUroNHw0rneibim2dRQnIGW0uEl-5QcjTEB9JMuSXm0l86hRBmU5ntCdd5qmHh7iR1XI0A4FUpwHU3GI5SiRyRDEkSF7RWThTXljMN64Sh7NVoO0"/>
 <div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 font-label-caps text-[10px]">STH BADGE</div>
 </div>
@@ -213,8 +380,8 @@
 </div>
 </div>
 <!-- Card 2 -->
-<div class="glass-card inner-glow group overflow-hidden">
-<div class="relative h-64 overflow-hidden">
+<div class="glass-card inner-glow group overflow-hidden tilt-card">
+<div class="relative h-64 overflow-hidden card-image-wrapper">
 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-performance Nissan Skyline GT-R R34 scale model in a deep midnight blue, presented in a futuristic neon-lit garage setting. Blue and red neon streaks reflect off its aerodynamic body. The image is captured with a low angle to give the small car a monumental, powerful appearance. Cinematic lighting and sharp edges define the premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSeR-4jsVkUwQ7EWK9-ys4_MBEnGwUx0q6By721qnLEJX3Peoz79THnqTulAiN5rNB1brUxE3pykXn9QkQapABRkmmlr6W1djS6sk-WBZQOnmYLlDf6jKu3GoJytynJPPagmnDcm1Kry_rvGoHfrCqwGECzos9iQUnLtgIWF7AOYZ7K_jfZopJaV9SI6ctK-EVHuY2N5OmxBcH8z_sP9zgp58lZ76xp8ywwL-v_osfXh87jzcN5o4qiAWUiDi-YDetQlXOmr5HjwM"/>
 <div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 font-label-caps text-[10px]">RARE BADGE</div>
 </div>
@@ -228,8 +395,8 @@
 </div>
 </div>
 <!-- Card 3 -->
-<div class="glass-card inner-glow group overflow-hidden">
-<div class="relative h-64 overflow-hidden">
+<div class="glass-card inner-glow group overflow-hidden tilt-card">
+<div class="relative h-64 overflow-hidden card-image-wrapper">
 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A striking white and black Porsche 911 GT3 RS Hot Wheels model featured in a minimalist, bright architectural space. Soft, high-key lighting illuminates every curve and the aggressive rear wing. The design aesthetic is clean, modern, and high-prestige, reflecting the car's racing heritage. Subtle grey gradients and sharp focus create a sense of extreme speed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAar_jKgLdUIUg7JjmGblj8siuO2R8IqsyOGZ5V9n8-_sGO2-sUEUFl2NYeU-ZS6Rd5Qep19fRPJSZLEFDJ9aDOlkbNKm6BkJVx5of3Xzapvy_v7HdfBkE9oEwA6YWb8GhkgSVOsmLVOFPA9FujGhJHIF0jVkwj3r46TpnhG0-IOjmmYpE-H2pLUFKdcKnU_9uNtbYSV4cpjbEnq8n5UYQK7T7rEyhO6T6v7XPWvJWT_f1__mdbCnB9CsiiDOG2E-xypzLT-NRxL6I"/>
 <div class="absolute top-4 right-4 bg-tertiary text-on-tertiary px-3 py-1 font-label-caps text-[10px]">LIMITED EDITION</div>
 </div>
@@ -480,6 +647,20 @@
         document.querySelectorAll('section').forEach(section => {
             section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
             observer.observe(section);
+        });
+
+        // Staggered children observer
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.stagger-children').forEach(el => {
+            staggerObserver.observe(el);
         });
 
         // Simple counter animation
